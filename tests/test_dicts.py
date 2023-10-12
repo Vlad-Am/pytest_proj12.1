@@ -1,8 +1,14 @@
 from utils import dicts
+import pytest
 
 
-def test_dicts():
-    assert dicts.get_val({"a": 1, "b": 2}, "a") == 1
-    assert dicts.get_val({"a": 1, "b": 2}, "a", "git") == 1
+@pytest.fixture
+def dicts_fixture():
+    return {"a": 1, "b": 2}
+
+
+def test_dicts(dicts_fixture):
+    assert dicts.get_val(dicts_fixture, "a") == 1
+    assert dicts.get_val(dicts_fixture, "a", "git") == 1
     assert dicts.get_val({}, "a", "git") == "git"
-    assert dicts.get_val({"a": 1, "b": 2}, "c", "git") == "git"
+    assert dicts.get_val(dicts_fixture, "c", "git") == "git"
